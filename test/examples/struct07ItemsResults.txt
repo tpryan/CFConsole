@@ -1,0 +1,9 @@
+Struct: 7 items
+--------------------
+    LONG: 1
+  LONGER: 2
+ LONGEST: 3
+  MEDIUM: gigity
+   SHORT: 5
+ SHORTER: fsdfsdfsdf
+SHORTEST: sadsadasfasfasgfasgga

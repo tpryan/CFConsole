@@ -1,0 +1,5 @@
+Struct: 3 items
+--------------------
+   LONG: 1
+ LONGER: 2
+LONGEST: 3
