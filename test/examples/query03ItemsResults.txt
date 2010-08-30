@@ -1,0 +1,6 @@
+Query: 3 records
+--------------------
+ANOTHERCOLUMN                            COLUMN1              
+1234556789123455678912345567891234556789 1234556789           
+ahddasah                                 asdakjfhkasjhfuwarhk 
+des                                      fie38djde

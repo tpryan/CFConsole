@@ -17,9 +17,52 @@ component{
 		else if (IsStruct(arguments.var)){
 			ArrayAppend(result, dumpStruct(arguments.var));
 		}
+		else if (isQuery(arguments.var)){
+			ArrayAppend(result, dumpQuery(arguments.var));
+		}	
 	
 	
 		return ArrayToList(result, variables.NL);
+	}
+	
+	public string function dumpQuery(required query queryToDump){
+		var result = [];
+		var i = 0;
+		var j = 0;
+		var columnLens = lenOflongestInQueryColumns(arguments.queryToDump);
+		var columns = ListToArray(arguments.queryToDump.columnList);
+		
+		ArrayAppend(result, "Query: " & arguments.queryToDump.recordCount & " records");
+		ArrayAppend(result, "--------------------");
+		
+		//header
+		var lineArray = [];
+		for (j=1; j <=ArrayLen(columns); j++){
+			var column = columns[j];
+			ArrayAppend(lineArray, padStr(column,columnLens[column]+1, "left"));
+		}
+		ArrayAppend(result, ArrayToList(lineArray,""));		
+		
+		
+		for (i=1; i <= arguments.queryToDump.recordcount; i++ ){
+			
+			var lineArray = [];
+			for (j=1; j <=ArrayLen(columns); j++){
+				var column = columns[j];
+			
+				if (isSimpleValue(arguments.queryToDump[column][i])){
+					ArrayAppend(lineArray, padStr(arguments.queryToDump[column][i], columnLens[column]+1, "left"));
+				}
+				else{
+					ArrayAppend(lineArray, padStr(dump(columnLens[column]), columnLens[column]+1, "left"));
+				}
+				
+			}	
+			ArrayAppend(result, ArrayToList(lineArray,""));		
+			
+		}
+	
+		return Trim(ArrayToList(result, variables.NL));
 	}
 	
 	public string function dumpArray(required array arrayToDump){
@@ -62,13 +105,21 @@ component{
 		return Trim(ArrayToList(result, variables.NL));
 	}
 	
-	public string function padStr(required string str, required numeric len){
+	public string function padStr(required string str, required numeric len, string align="right"){
 		var result = [];
 		var i = 0;
 		for (i=len(str); i<arguments.len; i++){
 			ArrayAppend(result, " ");
 		}
-		ArrayAppend(result, str);
+		if (FindNoCase("left", arguments.align)){
+			ArrayPrepend(result, str);
+		}
+		else{
+			ArrayAppend(result, str);
+		}
+		
+		
+		
 		
 		return ArrayToList(result, ""); 
 	}
@@ -82,6 +133,28 @@ component{
 		ArraySort(countArray,"numeric","desc");
 		
 		return countArray[1];  
+	}
+	
+	public struct function lenOflongestInQueryColumns(required query queryToCount){
+		
+		var i = 0;
+		var j = 0;
+		var columns = ListToArray(arguments.queryToCount.columnList);
+		var result ={};
+		
+		for(j=1; j<= ArrayLen(columns); j++){
+			var column = columns[j];
+			var countArray = [];
+			ArrayAppend(countArray, len(column));
+			for(i=1;i<= arguments.queryToCount.recordCount; i++){
+				ArrayAppend(countArray, len(arguments.queryToCount[column][i]));
+			}
+			ArraySort(countArray,"numeric","desc");
+		
+			result[columns[j]]=countArray[1]; ; 
+		}
+		
+		return result; 
 	}
     
 

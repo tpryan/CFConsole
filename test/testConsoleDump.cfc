@@ -39,5 +39,23 @@ component extends="mxunit.framework.TestCase"{
 		var actual = variables.consoleDump.dump(itemToTest);
 		AssertEquals(expected,actual);
 	} 
+	
+	public void function testQuery03Items(){
+		var expected = FileRead(ExpandPath('./examples/query03ItemsResults.txt'));
+		var result=QueryNew("column1,anothercolumn");
+		QueryAddRow(result);
+		QuerySetCell(result,"column1","1234556789");
+		QuerySetCell(result,"anothercolumn","1234556789123455678912345567891234556789");
+		QueryAddRow(result);
+		QuerySetCell(result,"column1","asdakjfhkasjhfuwarhk");
+		QuerySetCell(result,"anothercolumn","ahddasah");
+		QueryAddRow(result);
+		QuerySetCell(result,"column1","fie38djde");
+		QuerySetCell(result,"anothercolumn","des");
+		
+		var itemToTest = result;  
+		var actual = variables.consoleDump.dump(itemToTest);
+		AssertEquals(expected,actual);
+	} 
 
 }

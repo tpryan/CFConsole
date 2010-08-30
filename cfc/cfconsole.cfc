@@ -6,7 +6,7 @@ component{
     }
     
 
- 	public string function runCode(required string code, string language="cfscript"){
+ 	public string function runCode(required string code, boolean isCFML=false){
 		var results = "";
 		var dump = "";
 		var i = 0;
@@ -14,11 +14,12 @@ component{
 		var tempSpace = GetDirectoryFromPath(getCurrentTemplatePath());
 		var tempFileName = createUUID();
 		var tempFile = tempSpace & "/" & tempFileName  & ".cfm";
-		if (FindNoCase("cfscript", arguments.language)){
-			FileWrite(tempFile, "<cfscript>" & arguments.code & "</cfscript>");		
+		
+		if (arguments.isCFML){
+			FileWrite(tempFile, arguments.code);
 		}
 		else{
-			FileWrite(tempFile, arguments.code);
+			FileWrite(tempFile, "<cfscript>" & arguments.code & "</cfscript>");		
 		}	
 		
 		var pre = duplicate(variables);
