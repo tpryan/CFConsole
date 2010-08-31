@@ -22,7 +22,7 @@ component{
 		}	
 	
 	
-		return ArrayToList(result, variables.NL);
+		return ArrayToList(result, variables.NL) & variables.NL & variables.NL;
 	}
 	
 	public string function dumpQuery(required query queryToDump){
@@ -62,7 +62,7 @@ component{
 			
 		}
 	
-		return Trim(ArrayToList(result, variables.NL));
+		return Trim(ArrayToList(result, variables.NL) & variables.NL);
 	}
 	
 	public string function dumpArray(required array arrayToDump){
