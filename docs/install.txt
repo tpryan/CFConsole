@@ -10,6 +10,7 @@ To Install
 		Startup Mode:		Manual
 		Press Add Gateway Instance
 		Then click the green Play button next to the cfconsoleTelnet instance
+		An error comes up here that you cannot start the gateway.  I fixed it by running ColdFusion under sudo.
 		
 To call 
 Telnet to your ColdFusion server
