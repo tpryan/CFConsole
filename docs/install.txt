@@ -1,0 +1,17 @@
+To Install
+	Unzip files somewhere ex. /Sites/cfconsole
+	Login to ColdFusion Administrator
+	Go to Event Gateways -> Gateway Instances
+	In the Add/Edit ColdFusion Event Gateways Instances Form Set these:
+		Gateway ID: 		cfconsoleTelnet
+		Gateway Type:		Socket - listens on a socket
+		CFC Path: 			<wherever you put them> ex. /Sites/cfconsole/gateway/telnet.cfc
+		Configuration File: <wherever you put them> ex. /Sites/cfconsole/gateway/socket.cfg
+		Startup Mode:		Manual
+		Press Add Gateway Instance
+		Then click the green Play button next to the cfconsoleTelnet instance
+		
+To call 
+Telnet to your ColdFusion server
+follow prompts
+After it says you are logged in start typing your ColdFusion code.		
