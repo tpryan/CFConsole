@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="test.ant" name="cfconsole" basedir=".">
+	
+	<property file="settings.properties"/>
+	
+	<target name="test.ant" description="Exports the script of the database ">
+		<echo message="Testing ant in this environment. " />
+	</target>
+	
+	<target name="build" depends="build.clean,build.copy.files,build.polish" description="All of the stuff surrounding creating a clean copy of the build" />
+	
+	
+	<target name="build.clean">
+		<echo message="Cleaning Build Space"/>
+		<delete dir="${build.dir}"/>
+	</target>
+	
+	<target name="build.copy.files" description="Create a gitless version of the source code.">
+		<echo message="Copying Files to Build Location"/>
+		<copy todir="${build.dir}" preservelastmodified="true">
+			<fileset dir="${dev.dir}">
+				<exclude name='.gitignore'/>
+				<exclude name='.git/**'/>
+				<exclude name='sql/**'/>
+				<exclude name='test/**'/>
+				<exclude name='.apptacular/**'/>
+				<exclude name='.project'/>
+				<exclude name='.settings/**'/>
+				<exclude name='settings.properties'/>
+				<exclude name='settings.xml'/>
+				<exclude name='build.xml'/>
+			</fileset>	
+			
+			
+		</copy>
+	</target>
+	
+	
+	<target name="build.polish">
+		<echo message="Removing extra files."/>
+		<delete file='${build.dir}/.settings'/>
+	</target>
+
+</project>	
